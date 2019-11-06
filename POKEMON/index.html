@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="style.css">
+    <title>HTML</title>
+</head>
+<body>
+    <h1>Qual o nome do seu Pokémon?</h1>
+    <form>
+        <div class="container">
+          <input type="text" class="class_pokemon" id="input_pokemon" placeholder="Digite aqui..."/>
+          <button id="btn_procurar" class="conteudoPrincipal-btn conteudoPrincipal-btn-cadastro">Cadastrar</button>
+        </div>
+    </form>
+</body>
+<script>
+    const input_pokemon = document.querySelector('#input_pokemon');
+        const btn_procurar = document.querySelector('#btn_procurar');
+
+        window.onload = function () {
+
+            let url = 'https://pokeapi.co/api/v2/pokemon';
+
+            fetch(url)
+                .then(resposta => resposta.json())
+                .then(data => construirTabela(data))
+                .catch(erro => console.log(erro));
+
+            function construirTabela(categorias) {
+
+                categorias.forEach(element => {
+
+                    const tr = document.createElement('tr');
+                    const td_id = document.createElement('td');
+                    const td_nome = document.createElement('td');
+
+                    td_id.textContent = element.idCategoria;
+                    td_nome.textContent = element.nome;
+
+                    tr.appendChild(td_id);
+                    tr.appendChild(td_nome);
+                    tabela.appendChild(tr);
+                });
+            }
+        }
+</script>
+</html>
